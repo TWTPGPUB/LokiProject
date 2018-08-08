@@ -1,0 +1,40 @@
+<style>
+body {
+  font-family: Arial;
+}
+</style>
+<hr>
+<button onclick="runGetWithNoParams('allData');">GET /allData</button>
+<P>
+<button onclick="blink();">PUT /blink</button>
+
+<hr>
+
+<div id="results"></div>
+
+
+
+
+
+<script>
+function runGetWithNoParams(path) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("results").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/"+path, true);
+  xhttp.send();
+}
+function blink() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("results").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("PUT", "/blink", true);
+  xhttp.send();
+}
+</script>

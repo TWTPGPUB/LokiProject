@@ -29,6 +29,28 @@ app.use(function(req, res, next){
 });
 
 app.use(cors());
+//================LandingPage
+router.get("/", function(req, res){
+  data = "<H1>Device Info</h1>";
+  data += "<h2>Network Interfaces</h2>"+scanUtils.getIPInfo("html");
+  data += "<h2>Hostname</h2><li>"+scanUtils.getHostName();
+  data += "<h2>Device Name</h2><li>"+g_deviceName;
+  data += "<h2>Supported API Calls:</h2>";
+  
+  var fs = require('fs'),
+      path = require('path'),    
+      filePath = path.join(__dirname, 'start.html');
+
+  fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data2){
+    if (!err) {
+        console.log('received data: ' + data2);
+        res.send(data+data2).end();
+    } else {
+        console.log(err);
+    }
+});
+  
+});
 
 //===============Service Calls
 //Return the device name as a JSON object, if no name is set, use MAC/Hostname
